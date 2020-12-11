@@ -3,6 +3,7 @@ import React from "react";
 import Header from "../components/Header";
 import { Form, Row, Col, Button, ButtonGroup } from "react-bootstrap";
 import { useState } from "react";
+import longRoute from "../data/long";
 
 export default function Europe() {
   // const [score, set_score] = useState;
@@ -16,6 +17,8 @@ export default function Europe() {
   const [name, set_name] = useState("");
   const [screenName, set_screenName] = useState("");
   const [finalScore, set_finalScore] = useState(0);
+
+  console.log(longRoute);
 
   const data = [
     value1,
