@@ -1,12 +1,14 @@
 import "./App.css";
-// import { Switch, Route } from "react-router-dom";
-import Header from "../src/components/Header";
+import { Switch, Route } from "react-router-dom";
+
+import Europe from "./pages/europe";
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      hello hello
+      <Switch>
+        <Route path="/" component={Europe} />
+      </Switch>
     </div>
   );
 }
