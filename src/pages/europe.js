@@ -17,13 +17,15 @@ export default function Europe() {
   const [screenName, set_screenName] = useState("");
   const [finalScore, set_finalScore] = useState(0);
   const [longRouteScore, set_longRouteScore] = useState(0);
-  const [stations, set_stations] = useState(0);
+  const [stations, set_stations] = useState(12);
 
   const shortRouteSorted = shortRoute.sort((a, b) => {
     return a.name.localeCompare(b.name);
   });
   // console.log(longRoute);
   // console.log(shortRoute.length);
+
+  console.log(stations);
 
   let data = [
     value1,
@@ -50,7 +52,13 @@ export default function Europe() {
     set_longRouteScore(0);
   };
 
+  const scroll = (e) => {
+    e.preventDefault();
+    window["scrollTo"]({ top: 0, behavior: "smooth" });
+  };
+
   const countScore = (e) => {
+    e.preventDefault();
     const sunShort = dataShort.reduce((sum, num) => {
       return sum + num;
     });
@@ -61,7 +69,7 @@ export default function Europe() {
       return sum + num;
     });
     console.log(`final score`, score);
-    e.preventDefault();
+    scroll(e);
     set_screenName(name);
     set_finalScore(score);
   };
@@ -189,7 +197,6 @@ export default function Europe() {
                 <Form.Check
                   onChange={checkbox}
                   key={route.name}
-                  inline
                   value={route.score}
                   label={route.name}
                   type="checkbox"
