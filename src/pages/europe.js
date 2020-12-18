@@ -59,11 +59,11 @@ export default function Europe() {
 
   const countScore = (e) => {
     e.preventDefault();
-    const sunShort = dataShort.reduce((sum, num) => {
-      return sum + num;
-    });
-    console.log(sunShort);
-    data.push(sunShort);
+    // const sunShort = dataShort.reduce((sum, num) => {
+    //   return sum + num;
+    // });
+    // console.log(sunShort);
+    // data.push(sunShort);
     console.log(`hew`, data);
     const score = data.reduce((sum, num) => {
       return sum + num;
@@ -73,11 +73,21 @@ export default function Europe() {
     set_screenName(name);
     set_finalScore(score);
   };
-  let dataShort = [];
-  const checkbox = (e) => {
-    dataShort.push(parseInt(e.target.value));
-    console.log(dataShort);
+  let dataShort = {};
+
+  const getShortRoutes = (e, route) => {
+    e.preventDefault();
+    console.log(`short route before changes`, route, e.target.value);
+    route.status = e.target.value;
+    dataShort[route.name] = route;
+    return dataShort;
+    // console.log(`fererr`, dataShort);
   };
+
+  // const checkbox = (e) => {
+  //   dataShort.push(parseInt(e.target.value));
+  //   console.log(dataShort);
+  // };
 
   return (
     <div>
@@ -158,7 +168,7 @@ export default function Europe() {
           </Form.Group>
         </fieldset>
 
-        <Form.Group controlId="exampleForm.ControlSelect1">
+        <Form.Group>
           <Form.Label>Your long route:</Form.Label>
           <Form.Control
             onChange={(e) => {
@@ -176,7 +186,7 @@ export default function Europe() {
             })}
           </Form.Control>
         </Form.Group>
-        <Form.Group controlId="exampleForm.ControlSelect1">
+        <Form.Group>
           <Form.Label>Stations used:</Form.Label>
           <Form.Control
             onChange={(e) => {
@@ -191,17 +201,37 @@ export default function Europe() {
         </Form.Group>
         <Form.Group>
           <Form.Label>Your short routes: </Form.Label>
-          <div key={`inline-checkbox`} className="mb-3">
+          <div className="mb-3">
             {shortRouteSorted.map((route) => {
               return (
-                <Form.Check
-                  onChange={checkbox}
-                  key={route.name}
-                  value={route.score}
-                  label={route.name}
-                  type="checkbox"
-                  id={`inline-checkbox-2`}
-                />
+                <Col key={route.name}>
+                  <ButtonGroup
+                    onClick={(e) => {
+                      getShortRoutes(e, route);
+                    }}
+                    aria-label="Basic example"
+                  >
+                    <Form.Label key={route.name}>{route.name}</Form.Label>
+                    <Button
+                      style={{
+                        backgroungColor:
+                          route.status === "Done" ? "red" : "blue", ///<<< to make it work i should use redux since i change state of the object.
+                        ////then i have to store this state in the store and fetch new data every time i change status of the object
+                      }}
+                      id="1"
+                      value="Done"
+                    >
+                      Done
+                    </Button>
+
+                    <Button id="2" value="default">
+                      default
+                    </Button>
+                    <Button id="3" value="not-done">
+                      not-done
+                    </Button>
+                  </ButtonGroup>{" "}
+                </Col>
               );
             })}
           </div>
