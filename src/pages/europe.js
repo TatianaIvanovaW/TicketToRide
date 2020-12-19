@@ -4,9 +4,9 @@ import { Form, Row, Col, Button, ButtonGroup } from "react-bootstrap";
 import { useState } from "react";
 import longRoute from "../data/long";
 import shortRoute from "../data/short";
+import { img } from "../resurses/links";
 
 export default function Europe() {
-  const img = "https://img.icons8.com/android/24/000000/railroad-car.png";
   const [value1, set_value1] = useState(0);
   const [value2, set_value2] = useState(0);
   const [value3, set_value3] = useState(0);
@@ -22,10 +22,6 @@ export default function Europe() {
   const shortRouteSorted = shortRoute.sort((a, b) => {
     return a.name.localeCompare(b.name);
   });
-  // console.log(longRoute);
-  // console.log(shortRoute.length);
-
-  console.log(stations);
 
   let data = [
     value1,
@@ -37,8 +33,6 @@ export default function Europe() {
     parseInt(longRouteScore),
     stations,
   ];
-
-  console.log(`data array`, data);
 
   const reset = () => {
     set_value1(0);
@@ -59,11 +53,6 @@ export default function Europe() {
 
   const countScore = (e) => {
     e.preventDefault();
-    // const sunShort = dataShort.reduce((sum, num) => {
-    //   return sum + num;
-    // });
-    // console.log(sunShort);
-    // data.push(sunShort);
     console.log(`hew`, data);
     const score = data.reduce((sum, num) => {
       return sum + num;
@@ -73,21 +62,10 @@ export default function Europe() {
     set_screenName(name);
     set_finalScore(score);
   };
-  let dataShort = {};
 
   const getShortRoutes = (e, route) => {
-    e.preventDefault();
-    console.log(`short route before changes`, route, e.target.value);
-    route.status = e.target.value;
-    dataShort[route.name] = route;
-    return dataShort;
-    // console.log(`fererr`, dataShort);
+    console.log(route, e.target.value);
   };
-
-  // const checkbox = (e) => {
-  //   dataShort.push(parseInt(e.target.value));
-  //   console.log(dataShort);
-  // };
 
   return (
     <div>
@@ -113,6 +91,9 @@ export default function Europe() {
           <Form.Label column sm={2}>
             Score : {finalScore}
           </Form.Label>
+          <Button onClick={reset} type="submit">
+            Reset
+          </Button>
         </Form.Group>
         <fieldset>
           <Form.Group as={Row}>
@@ -167,7 +148,6 @@ export default function Europe() {
             </Row>
           </Form.Group>
         </fieldset>
-
         <Form.Group>
           <Form.Label>Your long route:</Form.Label>
           <Form.Control
@@ -199,54 +179,53 @@ export default function Europe() {
             <option value={0}>3</option>
           </Form.Control>
         </Form.Group>
-        <Form.Group>
-          <Form.Label>Your short routes: </Form.Label>
-          <div className="mb-3">
-            {shortRouteSorted.map((route) => {
-              return (
-                <Col key={route.name}>
-                  <ButtonGroup
-                    onClick={(e) => {
-                      getShortRoutes(e, route);
-                    }}
-                    aria-label="Basic example"
-                  >
-                    <Form.Label key={route.name}>{route.name}</Form.Label>
-                    <Button
-                      style={{
-                        backgroungColor:
-                          route.status === "Done" ? "red" : "blue", ///<<< to make it work i should use redux since i change state of the object.
-                        ////then i have to store this state in the store and fetch new data every time i change status of the object
-                      }}
-                      id="1"
-                      value="Done"
-                    >
-                      Done
-                    </Button>
-
-                    <Button id="2" value="default">
-                      default
-                    </Button>
-                    <Button id="3" value="not-done">
-                      not-done
-                    </Button>
-                  </ButtonGroup>{" "}
-                </Col>
-              );
-            })}
-          </div>
-        </Form.Group>
-        <Form.Group as={Row}>
-          <Col sm={{ span: 10, offset: 2 }}>
-            <Button onClick={countScore} type="submit">
-              Count score
-            </Button>
-            <Button onClick={reset} type="submit">
-              Reset
-            </Button>
-          </Col>
-        </Form.Group>
       </Form>
+      <Form.Group>
+        <Form.Label>Your short routes: </Form.Label>
+        <div className="mb-3">
+          {shortRouteSorted.map((route) => {
+            return (
+              <Col key={route.name}>
+                <Form.Label key={route.name}>{route.name}</Form.Label>
+                <Form
+                  onChange={(e) => {
+                    getShortRoutes(e, route);
+                  }}
+                >
+                  <input
+                    type="radio"
+                    id="not done"
+                    name="status"
+                    value={-route.score}
+                  ></input>
+                  <label>Not done</label>
+                  <input
+                    type="radio"
+                    id="not choosen"
+                    name="status"
+                    value={0}
+                  ></input>
+                  <label>not choosen</label>
+                  <input
+                    type="radio"
+                    id="done"
+                    name="status"
+                    value={route.score}
+                  ></input>
+                  <label>done</label>
+                </Form>
+              </Col>
+            );
+          })}
+        </div>
+      </Form.Group>
+      <Form.Group as={Row}>
+        <Col sm={{ span: 10, offset: 2 }}>
+          <Button onClick={countScore} type="submit">
+            Count score
+          </Button>
+        </Col>
+      </Form.Group>
     </div>
   );
 }
