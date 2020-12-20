@@ -142,12 +142,16 @@ export default function Europe() {
             </Button>
           </Form.Group>
           <fieldset>
-            <Form.Group as={Row}>
+            <Form.Group>
               <Form.Label as="legend" column sm={2}>
                 Routes
               </Form.Label>
               <Row sm={10}>
-                <ButtonGroup size="lg" className="mb-2">
+                <ButtonGroup
+                  style={{ display: "flex", flexWrap: "wrap" }}
+                  size="lg"
+                  className="mb-2"
+                >
                   <Button
                     style={{ margin: "10px" }}
                     variant="secondary"
@@ -175,6 +179,7 @@ export default function Europe() {
                   >
                     3 <img alt="train" src={img}></img> trains: {value3}
                   </Button>
+
                   <Button
                     style={{ margin: "10px" }}
                     variant="secondary"
