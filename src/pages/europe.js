@@ -92,7 +92,7 @@ export default function Europe() {
   };
 
   return (
-    <div>
+    <div style={{ fontFamily: "'Nova Flat', cursive" }}>
       <Header />
       <Form>
         <Form.Group as={Row} controlId="formHorizontalEmail">
@@ -217,7 +217,15 @@ export default function Europe() {
                 }}
               >
                 <Card style={{ width: "18rem", margin: "20px" }}>
-                  <Card.Header key={route.name}>{route.name}</Card.Header>
+                  <Card.Header
+                    style={{
+                      fontFamily: "'Fredericka the Great', cursive",
+                      fontSize: "25px",
+                    }}
+                    key={route.name}
+                  >
+                    {route.name}
+                  </Card.Header>
                   <ListGroup variant="flush">
                     <ListGroup.Item>
                       <input
