@@ -26,6 +26,7 @@ export default function Europe() {
   const [finalScore, set_finalScore] = useState(0);
   const [longRouteScore, set_longRouteScore] = useState(0);
   const [stations, set_stations] = useState(12);
+  const [lrStatus, set_lrStatus] = useState("done");
 
   const shortRouteSorted = shortRoute.sort((a, b) => {
     return a.name.localeCompare(b.name);
@@ -38,7 +39,7 @@ export default function Europe() {
     value4 * 7,
     value6 * 15,
     value8 * 21,
-    parseInt(longRouteScore),
+    longRouteScore,
     stations,
   ];
 
@@ -107,15 +108,9 @@ export default function Europe() {
       console.log(shorts);
       return shorts;
     }
-
-    // if (e.target.value === "done") {
-    //   shorts.push(route.score);
-    // } else if (e.target.value === "notdone") {
-    //   shorts.push(-route.score);
-    // } else shorts.push(0);
-    // console.log(shorts);
-    // return shorts;
   };
+
+  console.log(`lomg route`, longRouteScore);
 
   return (
     <div>
@@ -211,11 +206,34 @@ export default function Europe() {
               </Row>
             </Form.Group>
           </fieldset>
+          <Form.Label>
+            Your long route (first choose the status then the route):
+          </Form.Label>
+          <ListGroup
+            onChange={(e) => {
+              set_lrStatus(e.target.value);
+            }}
+          >
+            <ListGroup.Item>
+              <input id="done" name="status" type="radio" value="done"></input>
+              <label>Done</label>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <input
+                id="not done"
+                name="status"
+                type="radio"
+                value="notdone"
+              ></input>
+              <label>Not done</label>
+            </ListGroup.Item>
+          </ListGroup>
           <Form.Group>
-            <Form.Label>Your long route:</Form.Label>
             <Form.Control
               onChange={(e) => {
-                set_longRouteScore(e.target.value);
+                lrStatus === "done"
+                  ? set_longRouteScore(parseInt(e.target.value))
+                  : set_longRouteScore(-parseInt(e.target.value));
               }}
               as="select"
             >
