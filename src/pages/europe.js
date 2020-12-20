@@ -1,6 +1,14 @@
 import React from "react";
 import Header from "../components/Header";
-import { Form, Row, Col, Button, ButtonGroup } from "react-bootstrap";
+import {
+  Form,
+  Row,
+  Col,
+  Button,
+  ButtonGroup,
+  Card,
+  ListGroup,
+} from "react-bootstrap";
 import { useState } from "react";
 import longRoute from "../data/long";
 import shortRoute from "../data/short";
@@ -54,6 +62,13 @@ export default function Europe() {
   const countScore = (e) => {
     e.preventDefault();
     console.log(`hew`, data);
+    const finalShorts = shorts.reduce((sum, num) => {
+      return sum + num;
+    });
+    console.log(shorts);
+    console.log(finalShorts);
+    data.push(finalShorts);
+    console.log(data);
     const score = data.reduce((sum, num) => {
       return sum + num;
     });
@@ -63,8 +78,17 @@ export default function Europe() {
     set_finalScore(score);
   };
 
+  let shorts = [];
+  console.log("before changes", shorts);
+
   const getShortRoutes = (e, route) => {
-    console.log(route, e.target.value);
+    if (e.target.value === "done") {
+      shorts.push(route.score);
+    } else if (e.target.value === "notdone") {
+      shorts.push(-route.score);
+    } else shorts.push(0);
+    console.log(shorts);
+    return shorts;
   };
 
   return (
@@ -182,39 +206,41 @@ export default function Europe() {
       </Form>
       <Form.Group>
         <Form.Label>Your short routes: </Form.Label>
-        <div className="mb-3">
+
+        <div style={{ display: "flex", flexWrap: "wrap", margin: "20px" }}>
           {shortRouteSorted.map((route) => {
             return (
-              <Col key={route.name}>
-                <Form.Label key={route.name}>{route.name}</Form.Label>
-                <Form
-                  onChange={(e) => {
-                    getShortRoutes(e, route);
-                  }}
-                >
-                  <input
-                    type="radio"
-                    id="not done"
-                    name="status"
-                    value={-route.score}
-                  ></input>
-                  <label>Not done</label>
-                  <input
-                    type="radio"
-                    id="not choosen"
-                    name="status"
-                    value={0}
-                  ></input>
-                  <label>not choosen</label>
-                  <input
-                    type="radio"
-                    id="done"
-                    name="status"
-                    value={route.score}
-                  ></input>
-                  <label>done</label>
-                </Form>
-              </Col>
+              <Form
+                key={route.name}
+                onChange={(e) => {
+                  getShortRoutes(e, route);
+                }}
+              >
+                <Card style={{ width: "18rem", margin: "20px" }}>
+                  <Card.Header key={route.name}>{route.name}</Card.Header>
+                  <ListGroup variant="flush">
+                    <ListGroup.Item>
+                      <input
+                        type="radio"
+                        id="not done"
+                        name="status"
+                        value="notdone"
+                      ></input>
+                      <label>Not done</label>
+                    </ListGroup.Item>
+
+                    <ListGroup.Item>
+                      <input
+                        type="radio"
+                        id="done"
+                        name="status"
+                        value="done"
+                      ></input>
+                      <label>done</label>
+                    </ListGroup.Item>
+                  </ListGroup>
+                </Card>
+              </Form>
             );
           })}
         </div>
