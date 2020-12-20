@@ -70,9 +70,13 @@ export default function Europe() {
       data.push(
         shorts
           .map((route) => {
-            if (route.status === "done") return route.score;
-            if (route.status === "notdone") return -route.score;
-            if (route.status === "default") return 0;
+            return route.status === "done"
+              ? route.score
+              : route.status === "notdone"
+              ? -route.score
+              : route.status === "default"
+              ? 0
+              : null;
           })
           .reduce((sum, num) => {
             return sum + num;
