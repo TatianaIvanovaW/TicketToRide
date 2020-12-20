@@ -62,9 +62,12 @@ export default function Europe() {
   const countScore = (e) => {
     e.preventDefault();
     console.log(`hew`, data);
-    const finalShorts = shorts.reduce((sum, num) => {
-      return sum + num;
-    });
+    let finalShorts = 0;
+    if (shorts.lenght) {
+      finalShorts = shorts.reduce((sum, num) => {
+        return sum + num;
+      });
+    }
     console.log(shorts);
     console.log(finalShorts);
     data.push(finalShorts);
@@ -115,7 +118,7 @@ export default function Europe() {
           <Form.Label column sm={2}>
             Score : {finalScore}
           </Form.Label>
-          <Button onClick={reset} type="submit">
+          <Button variant="secondary" onClick={reset} type="submit">
             Reset
           </Button>
         </Form.Group>
@@ -127,6 +130,8 @@ export default function Europe() {
             <Row sm={10}>
               <ButtonGroup size="lg" className="mb-2">
                 <Button
+                  style={{ margin: "10px" }}
+                  variant="secondary"
                   onClick={() => {
                     return set_value1(value1 + 1);
                   }}
@@ -134,6 +139,8 @@ export default function Europe() {
                   1 <img alt="train" src={img}></img> trains: {value1}
                 </Button>
                 <Button
+                  style={{ margin: "10px" }}
+                  variant="secondary"
                   onClick={() => {
                     return set_value2(value2 + 1);
                   }}
@@ -141,6 +148,8 @@ export default function Europe() {
                   2 <img alt="train" src={img}></img> trains: {value2}
                 </Button>
                 <Button
+                  style={{ margin: "10px" }}
+                  variant="secondary"
                   onClick={() => {
                     return set_value3(value3 + 1);
                   }}
@@ -148,6 +157,8 @@ export default function Europe() {
                   3 <img alt="train" src={img}></img> trains: {value3}
                 </Button>
                 <Button
+                  style={{ margin: "10px" }}
+                  variant="secondary"
                   onClick={() => {
                     return set_value4(value4 + 1);
                   }}
@@ -155,6 +166,8 @@ export default function Europe() {
                   4 <img alt="train" src={img}></img> trains: {value4}
                 </Button>
                 <Button
+                  style={{ margin: "10px" }}
+                  variant="secondary"
                   onClick={() => {
                     return set_value6(value6 + 1);
                   }}
@@ -162,6 +175,8 @@ export default function Europe() {
                   6 <img alt="train" src={img}></img> trains: {value6}
                 </Button>
                 <Button
+                  style={{ margin: "10px" }}
+                  variant="secondary"
                   onClick={() => {
                     return set_value8(value8 + 1);
                   }}
@@ -255,7 +270,7 @@ export default function Europe() {
       </Form.Group>
       <Form.Group as={Row}>
         <Col sm={{ span: 10, offset: 2 }}>
-          <Button onClick={countScore} type="submit">
+          <Button variant="secondary" onClick={countScore} type="submit">
             Count score
           </Button>
         </Col>
