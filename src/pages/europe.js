@@ -117,7 +117,13 @@ export default function Europe() {
   return (
     <div>
       <Header />
-      <div style={{ fontFamily: "'Nova Flat', cursive", margin: "20px" }}>
+      <div
+        style={{
+          fontFamily: "'Nova Flat', cursive",
+          margin: "20px",
+          justifyContent: "center",
+        }}
+      >
         <Form>
           <Form.Group as={Row} controlId="formHorizontalEmail">
             <Form.Label column sm={2}>
@@ -396,13 +402,23 @@ export default function Europe() {
             })}
           </div>
         </Form.Group>
-        <Form.Group as={Row}>
-          <Col sm={{ span: 10, offset: 2 }}>
-            <Button variant="secondary" onClick={countScore} type="submit">
-              Count score
-            </Button>
-          </Col>
-        </Form.Group>
+
+        <Button
+          style={{
+            position: "fixed",
+            top: "12%",
+            right: "20px",
+            borderRadius: "50%",
+            width: "70px",
+            height: "70px",
+            fontSize: "40px",
+          }}
+          variant="success"
+          onClick={countScore}
+          type="submit"
+        >
+          ✓
+        </Button>
       </div>
     </div>
   );
