@@ -26,7 +26,7 @@ export default function Europe() {
   const [finalScore, set_finalScore] = useState(0);
   const [longRouteScore, set_longRouteScore] = useState(0);
   const [stations, set_stations] = useState(12);
-  const [lrStatus, set_lrStatus] = useState("done");
+  const [lrStatus, set_lrStatus] = useState(0);
 
   const shortRouteSorted = shortRoute.sort((a, b) => {
     return a.name.localeCompare(b.name);
@@ -39,9 +39,11 @@ export default function Europe() {
     value4 * 7,
     value6 * 15,
     value8 * 21,
-    longRouteScore,
+    lrStatus,
     stations,
   ];
+
+  console.log(`long route`, lrStatus);
 
   const reset = () => {
     set_value1(0);
@@ -214,31 +216,12 @@ export default function Europe() {
           <Form.Label>
             Your long route (first choose the status then the route):
           </Form.Label>
-          <ListGroup
-            onChange={(e) => {
-              set_lrStatus(e.target.value);
-            }}
-          >
-            <ListGroup.Item>
-              <input id="done" name="status" type="radio" value="done"></input>
-              <label>Done</label>
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <input
-                id="not done"
-                name="status"
-                type="radio"
-                value="notdone"
-              ></input>
-              <label>Not done</label>
-            </ListGroup.Item>
-          </ListGroup>
+
           <Form.Group>
             <Form.Control
               onChange={(e) => {
-                lrStatus === "done"
-                  ? set_longRouteScore(parseInt(e.target.value))
-                  : set_longRouteScore(-parseInt(e.target.value));
+                console.log(e.target.value);
+                set_longRouteScore(parseInt(e.target.value));
               }}
               as="select"
             >
@@ -251,6 +234,32 @@ export default function Europe() {
                 );
               })}
             </Form.Control>
+            <ListGroup
+              onChange={(e) => {
+                e.target.value === "done"
+                  ? set_lrStatus(longRouteScore)
+                  : set_lrStatus(-longRouteScore);
+              }}
+            >
+              <ListGroup.Item>
+                <input
+                  id="done"
+                  name="status"
+                  type="radio"
+                  value="done"
+                ></input>
+                <label>Done</label>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <input
+                  id="not done"
+                  name="status"
+                  type="radio"
+                  value="notdone"
+                ></input>
+                <label>Not done</label>
+              </ListGroup.Item>
+            </ListGroup>
           </Form.Group>
           <Form.Group>
             <Form.Label>Stations used:</Form.Label>
