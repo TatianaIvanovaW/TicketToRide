@@ -26,22 +26,13 @@ export default function Europe() {
   const [finalScore, set_finalScore] = useState(0);
   const [longRouteScore, set_longRouteScore] = useState(0);
   const [stations, set_stations] = useState(12);
-  const [lrStatus, set_lrStatus] = useState(0);
+  const [lrStatus, set_lrStatus] = useState("");
 
   const shortRouteSorted = shortRoute.sort((a, b) => {
     return a.name.localeCompare(b.name);
   });
 
-  let data = [
-    value1,
-    value2 * 2,
-    value3 * 4,
-    value4 * 7,
-    value6 * 15,
-    value8 * 21,
-    lrStatus,
-    stations,
-  ];
+  let data = [];
 
   console.log(`long route`, lrStatus);
 
@@ -65,9 +56,22 @@ export default function Europe() {
   let shorts = [];
 
   const countScore = (e) => {
+    data.push(
+      value1,
+      value2 * 2,
+      value3 * 4,
+      value4 * 7,
+      value6 * 15,
+      value8 * 21,
+
+      stations
+    );
+    const longRoute = lrStatus === "done" ? longRouteScore : -longRouteScore;
+
+    data.push(longRoute);
+
     e.preventDefault();
 
-    console.log(`count score`, shorts);
     console.log(data);
     if (shorts.length)
       data.push(
@@ -94,8 +98,6 @@ export default function Europe() {
     set_finalScore(score);
   };
 
-  console.log("before changes", shorts);
-
   const getShortRoutes = (e, route) => {
     if (shorts.includes(route)) {
       const choosenRoute = shorts.find((shortRoute) => {
@@ -111,8 +113,6 @@ export default function Europe() {
       return shorts;
     }
   };
-
-  console.log(`lomg route`, longRouteScore);
 
   return (
     <div>
@@ -154,61 +154,125 @@ export default function Europe() {
                   size="lg"
                   className="mb-2"
                 >
-                  <Button
-                    style={{ margin: "10px" }}
-                    variant="secondary"
-                    onClick={() => {
-                      return set_value1(value1 + 1);
-                    }}
-                  >
-                    1 <img alt="train" src={img}></img> trains: {value1}
-                  </Button>
-                  <Button
-                    style={{ margin: "10px" }}
-                    variant="secondary"
-                    onClick={() => {
-                      return set_value2(value2 + 1);
-                    }}
-                  >
-                    2 <img alt="train" src={img}></img> trains: {value2}
-                  </Button>
-                  <Button
-                    style={{ margin: "10px" }}
-                    variant="secondary"
-                    onClick={() => {
-                      return set_value3(value3 + 1);
-                    }}
-                  >
-                    3 <img alt="train" src={img}></img> trains: {value3}
-                  </Button>
+                  <div>
+                    {" "}
+                    <Button
+                      style={{ margin: "10px" }}
+                      variant="secondary"
+                      onClick={() => {
+                        return set_value1(value1 + 1);
+                      }}
+                    >
+                      1 <img alt="train" src={img}></img> trains: {value1}
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        return set_value1(value1 - 1);
+                      }}
+                      variant="danger"
+                    >
+                      -1
+                    </Button>
+                  </div>
+                  <div>
+                    {" "}
+                    <Button
+                      style={{ margin: "10px" }}
+                      variant="secondary"
+                      onClick={() => {
+                        return set_value2(value2 + 1);
+                      }}
+                    >
+                      2 <img alt="train" src={img}></img> trains: {value2}
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        return set_value2(value2 - 1);
+                      }}
+                      variant="danger"
+                    >
+                      -1
+                    </Button>
+                  </div>
+                  <div>
+                    {" "}
+                    <Button
+                      style={{ margin: "10px" }}
+                      variant="secondary"
+                      onClick={() => {
+                        return set_value3(value3 + 1);
+                      }}
+                    >
+                      3 <img alt="train" src={img}></img> trains: {value3}
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        return set_value3(value3 - 1);
+                      }}
+                      variant="danger"
+                    >
+                      -1
+                    </Button>
+                  </div>
 
-                  <Button
-                    style={{ margin: "10px" }}
-                    variant="secondary"
-                    onClick={() => {
-                      return set_value4(value4 + 1);
-                    }}
-                  >
-                    4 <img alt="train" src={img}></img> trains: {value4}
-                  </Button>
-                  <Button
-                    style={{ margin: "10px" }}
-                    variant="secondary"
-                    onClick={() => {
-                      return set_value6(value6 + 1);
-                    }}
-                  >
-                    6 <img alt="train" src={img}></img> trains: {value6}
-                  </Button>
-                  <Button
-                    style={{ margin: "10px" }}
-                    variant="secondary"
-                    onClick={() => {
-                      return set_value8(value8 + 1);
-                    }}
-                  >
-                    8 <img alt="train" src={img}></img> trains: {value8}
-                  </Button>
+                  <div>
+                    <Button
+                      style={{ margin: "10px" }}
+                      variant="secondary"
+                      onClick={() => {
+                        return set_value4(value4 + 1);
+                      }}
+                    >
+                      4 <img alt="train" src={img}></img> trains: {value4}
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        return set_value4(value4 - 1);
+                      }}
+                      variant="danger"
+                    >
+                      -1
+                    </Button>
+                  </div>
+                  <div>
+                    <Button
+                      style={{ margin: "10px" }}
+                      variant="secondary"
+                      onClick={() => {
+                        return set_value6(value6 + 1);
+                      }}
+                    >
+                      6 <img alt="train" src={img}></img> trains: {value6}
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        return set_value6(value6 - 1);
+                      }}
+                      variant="danger"
+                    >
+                      -1
+                    </Button>
+                  </div>
+                  <div>
+                    {" "}
+                    <Button
+                      style={{ margin: "10px" }}
+                      variant="secondary"
+                      onClick={() => {
+                        return set_value8(value8 + 1);
+                      }}
+                    >
+                      8 <img alt="train" src={img}></img> trains: {value8}
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        return set_value8(value8 - 1);
+                      }}
+                      variant="danger"
+                    >
+                      -1
+                    </Button>
+                  </div>
                 </ButtonGroup>
               </Row>
             </Form.Group>
@@ -220,7 +284,6 @@ export default function Europe() {
           <Form.Group>
             <Form.Control
               onChange={(e) => {
-                console.log(e.target.value);
                 set_longRouteScore(parseInt(e.target.value));
               }}
               as="select"
@@ -236,9 +299,7 @@ export default function Europe() {
             </Form.Control>
             <ListGroup
               onChange={(e) => {
-                e.target.value === "done"
-                  ? set_lrStatus(longRouteScore)
-                  : set_lrStatus(-longRouteScore);
+                set_lrStatus(e.target.value);
               }}
             >
               <ListGroup.Item>
