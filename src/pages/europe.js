@@ -125,6 +125,7 @@ export default function Europe() {
           <Form.Group>
             <Form.Control
               onChange={(e) => {
+                console.log(e.target.value);
                 set_longRouteScore(parseInt(e.target.value));
               }}
               as="select"
@@ -179,7 +180,6 @@ export default function Europe() {
         </Form>
         <Form.Group>
           <Form.Label>Your short routes: </Form.Label>
-
           <div style={{ display: "flex", flexWrap: "wrap", margin: "20px" }}>
             {shortRouteSorted.map((route) => {
               return (
@@ -236,6 +236,7 @@ export default function Europe() {
               );
             })}
           </div>
+          ;
         </Form.Group>
 
         <Button
