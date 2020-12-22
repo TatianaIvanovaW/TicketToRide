@@ -13,6 +13,7 @@ export default function Europe() {
   const [longRouteScore, set_longRouteScore] = useState(0);
   const [stations, set_stations] = useState(12);
   const [lrStatus, set_lrStatus] = useState("");
+  const [tScore, set_tScore] = useState(0);
 
   const shortRouteSorted = shortRoute.sort((a, b) => {
     return a.name.localeCompare(b.name);
@@ -20,12 +21,8 @@ export default function Europe() {
 
   let data = [];
 
-  console.log(`long route`, lrStatus);
-
   const reset = () => {
     set_finalScore(0);
-    set_screenName("");
-    set_longRouteScore(0);
   };
 
   const scroll = (e) => {
@@ -34,25 +31,18 @@ export default function Europe() {
   };
 
   let shorts = [];
+  const countTrains = (value1) => {
+    set_tScore(value1);
+  };
 
   const countScore = (e) => {
-    data.push(
-      // value1,
-      // value2 * 2,
-      // value3 * 4,
-      // value4 * 7,
-      // value6 * 15,
-      // value8 * 21,
+    e.preventDefault();
 
-      stations
-    );
+    data.push(tScore, stations);
     const longRoute = lrStatus === "done" ? longRouteScore : -longRouteScore;
 
     data.push(longRoute);
 
-    e.preventDefault();
-
-    console.log(data);
     if (shorts.length)
       data.push(
         shorts
@@ -71,9 +61,10 @@ export default function Europe() {
       return sum + num;
     });
     console.log(`final score`, score);
-    scroll(e);
+
     set_screenName(name);
     set_finalScore(score);
+    scroll(e);
   };
 
   const getShortRoutes = (e, route) => {
@@ -127,7 +118,7 @@ export default function Europe() {
               Reset
             </Button>
           </Form.Group>
-          <TrainButtons />
+          <TrainButtons score={countTrains} />
 
           <Form.Label>Your long route:</Form.Label>
 

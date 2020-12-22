@@ -1,9 +1,9 @@
 import React from "react";
 import { ButtonGroup, Button, Form, Row } from "react-bootstrap";
 import { img } from "../resurses/links";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function TrainButtons() {
+export default function TrainButtons({ score }) {
   const [value1, set_value1] = useState(0);
   const [value2, set_value2] = useState(0);
   const [value3, set_value3] = useState(0);
@@ -11,13 +11,12 @@ export default function TrainButtons() {
   const [value6, set_value6] = useState(0);
   const [value8, set_value8] = useState(0);
 
-  const trainScore = () => {
-    return (
-      value1 + value2 * 2 + value3 * 4 + value4 * 7 + value6 * 15 + value8 * 21
-    );
-  };
+  const result =
+    value1 + value2 * 2 + value3 * 4 + value4 * 7 + value6 * 15 + value8 * 21;
 
-  console.log(trainScore());
+  useEffect(() => {
+    score(result);
+  }, [result, score]);
 
   return (
     <div>
@@ -35,7 +34,9 @@ export default function TrainButtons() {
               <Button
                 style={{ margin: "10px" }}
                 variant="secondary"
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
+
                   return set_value1(value1 + 1);
                 }}
               >
