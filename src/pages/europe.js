@@ -1,6 +1,14 @@
 import React from "react";
 import Header from "../components/Header";
-import { Form, Row, Col, Button, Card, ListGroup } from "react-bootstrap";
+import {
+  Form,
+  Row,
+  Col,
+  Button,
+  Card,
+  ListGroup,
+  Alert,
+} from "react-bootstrap";
 import { useState } from "react";
 import longRoute from "../data/long";
 import shortRoute from "../data/short";
@@ -166,6 +174,10 @@ export default function Europe() {
         </Form>
         <Form.Group>
           <Form.Label>Your short routes: </Form.Label>
+          <Alert variant="danger">
+            choose first long route and stations and only then short routes!
+            otherwise it may lead to incorrect calculations. work in progress!
+          </Alert>
           <div style={{ display: "flex", flexWrap: "wrap", margin: "20px" }}>
             {shortRouteSorted.map((route) => {
               return (
