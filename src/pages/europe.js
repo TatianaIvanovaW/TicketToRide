@@ -5,6 +5,7 @@ import { useState } from "react";
 import longRoute from "../data/long";
 import shortRoute from "../data/short";
 import TrainButtons from "../components/TrainButtons";
+import CountButton from "../components/CountButton";
 
 export default function Europe() {
   const [name, set_name] = useState("");
@@ -15,56 +16,22 @@ export default function Europe() {
   const [lrStatus, set_lrStatus] = useState("");
   const [tScore, set_tScore] = useState(0);
 
+  const result = (score) => {
+    set_finalScore(score);
+    set_screenName(name);
+  };
+
   const shortRouteSorted = shortRoute.sort((a, b) => {
     return a.name.localeCompare(b.name);
   });
-
-  let data = [];
 
   const reset = () => {
     set_finalScore(0);
   };
 
-  const scroll = (e) => {
-    e.preventDefault();
-    window["scrollTo"]({ top: 0, behavior: "smooth" });
-  };
-
   let shorts = [];
   const countTrains = (value1) => {
     set_tScore(value1);
-  };
-
-  const countScore = (e) => {
-    e.preventDefault();
-
-    data.push(tScore, stations);
-    const longRoute = lrStatus === "done" ? longRouteScore : -longRouteScore;
-
-    data.push(longRoute);
-
-    if (shorts.length)
-      data.push(
-        shorts
-          .map((route) => {
-            return route.status === "done"
-              ? route.score
-              : route.status === "notdone"
-              ? -route.score
-              : null;
-          })
-          .reduce((sum, num) => {
-            return sum + num;
-          })
-      );
-    const score = data.reduce((sum, num) => {
-      return sum + num;
-    });
-    console.log(`final score`, score);
-
-    set_screenName(name);
-    set_finalScore(score);
-    scroll(e);
   };
 
   const getShortRoutes = (e, route) => {
@@ -125,6 +92,7 @@ export default function Europe() {
           <Form.Group>
             <Form.Control
               onChange={(e) => {
+                e.preventDefault();
                 console.log(e.target.value);
                 set_longRouteScore(parseInt(e.target.value));
               }}
@@ -141,6 +109,7 @@ export default function Europe() {
             </Form.Control>
             <ListGroup
               onChange={(e) => {
+                e.preventDefault();
                 set_lrStatus(e.target.value);
               }}
             >
@@ -239,22 +208,14 @@ export default function Europe() {
           ;
         </Form.Group>
 
-        <Button
-          style={{
-            position: "fixed",
-            top: "12%",
-            right: "20px",
-            borderRadius: "50%",
-            width: "70px",
-            height: "70px",
-            fontSize: "40px",
-          }}
-          variant="success"
-          onClick={countScore}
-          type="submit"
-        >
-          ✓
-        </Button>
+        <CountButton
+          tScore={tScore}
+          stations={stations}
+          lrStatus={lrStatus}
+          longRouteScore={longRouteScore}
+          shorts={shorts}
+          result={result}
+        />
       </div>
     </div>
   );
