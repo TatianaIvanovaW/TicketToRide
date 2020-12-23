@@ -15,6 +15,7 @@ export default function Europe() {
   const [stations, set_stations] = useState(12);
   const [lrStatus, set_lrStatus] = useState("");
   const [tScore, set_tScore] = useState(0);
+  // const [show, setShow] = useState(true);
 
   const result = (score) => {
     set_finalScore(score);
@@ -53,6 +54,22 @@ export default function Europe() {
   return (
     <div>
       <Header />
+      {/* {show ? (
+        <Alert variant="info">
+          <Alert.Heading>HI!!</Alert.Heading>
+          <p>
+            You should choose
+            {!shorts.lenght
+              ? " 3 short routes"
+              : shorts.lenght === 1
+              ? " 2 short routes"
+              : shorts.lenght === 2
+              ? " 1 short route"
+              : null}
+            {longRouteScore === 0 ? " and 1 long" : null}
+          </p>
+        </Alert>
+      ) : null} */}
       <div
         style={{
           fontFamily: "'Nova Flat', cursive",

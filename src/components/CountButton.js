@@ -50,14 +50,14 @@ export default function CountButton({
       <Button
         style={{
           position: "fixed",
-          top: "12%",
+          top: "25%",
           right: "20px",
           borderRadius: "50%",
           width: "70px",
           height: "70px",
           fontSize: "40px",
         }}
-        variant="success"
+        variant="info"
         onClick={countScore}
         type="submit"
       >
