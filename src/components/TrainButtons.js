@@ -37,7 +37,7 @@ export default function TrainButtons({ score }) {
                 onClick={(e) => {
                   e.preventDefault();
 
-                  return set_value1(value1 + 1);
+                  return value1 < 4 ? set_value1(value1 + 1) : null;
                 }}
               >
                 1 <img alt="train" src={img}></img> trains: {value1}
@@ -57,7 +57,7 @@ export default function TrainButtons({ score }) {
                 style={{ margin: "10px" }}
                 variant="secondary"
                 onClick={() => {
-                  return set_value2(value2 + 1);
+                  return value2 < 33 ? set_value2(value2 + 1) : null;
                 }}
               >
                 2 <img alt="train" src={img}></img> trains: {value2}
@@ -77,7 +77,7 @@ export default function TrainButtons({ score }) {
                 style={{ margin: "10px" }}
                 variant="secondary"
                 onClick={() => {
-                  return set_value3(value3 + 1);
+                  return value3 < 31 ? set_value3(value3 + 1) : null;
                 }}
               >
                 3 <img alt="train" src={img}></img> trains: {value3}
@@ -97,7 +97,7 @@ export default function TrainButtons({ score }) {
                 style={{ margin: "10px" }}
                 variant="secondary"
                 onClick={() => {
-                  return set_value4(value4 + 1);
+                  return value4 < 29 ? set_value4(value4 + 1) : null;
                 }}
               >
                 4 <img alt="train" src={img}></img> trains: {value4}
@@ -116,7 +116,7 @@ export default function TrainButtons({ score }) {
                 style={{ margin: "10px" }}
                 variant="secondary"
                 onClick={() => {
-                  return set_value6(value6 + 1);
+                  return value6 < 2 ? set_value6(value6 + 1) : null;
                 }}
               >
                 6 <img alt="train" src={img}></img> trains: {value6}
@@ -131,12 +131,11 @@ export default function TrainButtons({ score }) {
               </Button>
             </div>
             <div>
-              {" "}
               <Button
                 style={{ margin: "10px" }}
                 variant="secondary"
                 onClick={() => {
-                  return set_value8(value8 + 1);
+                  return value8 < 1 ? set_value8(value8 + 1) : null;
                 }}
               >
                 8 <img alt="train" src={img}></img> trains: {value8}
