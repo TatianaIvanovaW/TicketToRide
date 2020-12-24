@@ -21,8 +21,14 @@ export default function CountButton({
 
     data.push(tScore, stations);
 
-    data.push(lrStatus === "done" ? longRouteScore : -longRouteScore);
-
+    data.push(
+      lrStatus === "done"
+        ? longRouteScore
+        : lrStatus === "notdone"
+        ? -longRouteScore
+        : 0
+    );
+    console.log(shorts);
     if (shorts.length)
       data.push(
         shorts
@@ -37,6 +43,7 @@ export default function CountButton({
             return sum + num;
           })
       );
+    console.log(data);
     const score = data.reduce((sum, num) => {
       return sum + num;
     });

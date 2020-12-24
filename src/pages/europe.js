@@ -1,14 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
-import {
-  Form,
-  Row,
-  Col,
-  Button,
-  Card,
-  ListGroup,
-  Alert,
-} from "react-bootstrap";
+import { Form, Row, Col, Button, Card, ListGroup } from "react-bootstrap";
 import { useState } from "react";
 import longRoute from "../data/long";
 import shortRoute from "../data/short";
@@ -23,7 +15,7 @@ export default function Europe() {
   const [stations, set_stations] = useState(12);
   const [lrStatus, set_lrStatus] = useState("");
   const [tScore, set_tScore] = useState(0);
-  // const [show, setShow] = useState(true);
+  const [shorts, set_Shorts] = useState([]);
 
   const result = (score) => {
     set_finalScore(score);
@@ -38,7 +30,6 @@ export default function Europe() {
     set_finalScore(0);
   };
 
-  let shorts = [];
   const countTrains = (value1) => {
     set_tScore(value1);
   };
@@ -49,12 +40,12 @@ export default function Europe() {
         return shortRoute === route;
       });
       choosenRoute.status = e.target.value;
-      console.log(shorts);
+
       return shorts;
     } else {
       route.status = e.target.value;
-      shorts.push(route);
-      console.log(shorts);
+      set_Shorts([...shorts, route]);
+
       return shorts;
     }
   };
@@ -174,10 +165,6 @@ export default function Europe() {
         </Form>
         <Form.Group>
           <Form.Label>Your short routes: </Form.Label>
-          <Alert variant="danger">
-            choose first long route and stations and only then short routes!
-            otherwise it may lead to incorrect calculations. work in progress!
-          </Alert>
           <div style={{ display: "flex", flexWrap: "wrap", margin: "20px" }}>
             {shortRouteSorted.map((route) => {
               return (
