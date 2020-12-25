@@ -1,6 +1,14 @@
 import React from "react";
 import Header from "../components/Header";
-import { Form, Row, Col, Button, Card, ListGroup } from "react-bootstrap";
+import {
+  Form,
+  Row,
+  Col,
+  Button,
+  Card,
+  ListGroup,
+  Alert,
+} from "react-bootstrap";
 import { useState } from "react";
 import longRoute from "../data/long";
 import shortRoute from "../data/short";
@@ -16,6 +24,7 @@ export default function Europe() {
   const [lrStatus, set_lrStatus] = useState("");
   const [tScore, set_tScore] = useState(0);
   const [shorts, set_Shorts] = useState([]);
+  const [show, set_show] = useState(true);
 
   const result = (score) => {
     set_finalScore(score);
@@ -50,33 +59,46 @@ export default function Europe() {
     }
   };
 
+  // console.log(`check state`, shorts);
+
   return (
-    <div>
+    <div
+      style={{
+        fontFamily: "'Nova Flat', cursive",
+
+        justifyContent: "center",
+      }}
+    >
       <Header />
-      {/* {show ? (
-        <Alert variant="info">
+
+      {show ? (
+        <Alert
+          style={{
+            position: "sticky",
+            top: "0",
+            width: "100%",
+            zIndex: "10",
+          }}
+          variant="info"
+        >
           <Alert.Heading>HI!!</Alert.Heading>
           <p>
             You should choose
-            {!shorts.lenght
+            {!shorts.length
               ? " 3 short routes"
-              : shorts.lenght === 1
+              : shorts.length === 1
               ? " 2 short routes"
-              : shorts.lenght === 2
+              : shorts.length === 2
               ? " 1 short route"
               : null}
+            {longRouteScore !== 0 && shorts.length > 2 ? set_show(false) : null}
             {longRouteScore === 0 ? " and 1 long" : null}
           </p>
         </Alert>
-      ) : null} */}
-      <div
-        style={{
-          fontFamily: "'Nova Flat', cursive",
-          margin: "20px",
-          justifyContent: "center",
-        }}
-      >
-        <Form>
+      ) : null}
+
+      <div>
+        <Form style={{ margin: "20px" }}>
           <Form.Group as={Row} controlId="formHorizontalEmail">
             <Form.Label column sm={2}>
               Name
@@ -221,7 +243,6 @@ export default function Europe() {
               );
             })}
           </div>
-          ;
         </Form.Group>
 
         <CountButton
