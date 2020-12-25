@@ -58,7 +58,7 @@ export default function Europe() {
       return shorts;
     }
   };
-
+  console.log(`status`, lrStatus);
   // console.log(`check state`, shorts);
 
   return (
@@ -83,7 +83,7 @@ export default function Europe() {
         >
           <Alert.Heading>HI!!</Alert.Heading>
           <p>
-            You should choose
+            You should choose at least
             {!shorts.length
               ? " 3 short routes"
               : shorts.length === 1
@@ -91,8 +91,9 @@ export default function Europe() {
               : shorts.length === 2
               ? " 1 short route"
               : null}
+            {longRouteScore === 0 && shorts.length < 3 ? " and" : " "}
             {longRouteScore !== 0 && shorts.length > 2 ? set_show(false) : null}
-            {longRouteScore === 0 ? " and 1 long" : null}
+            {longRouteScore === 0 || lrStatus === "" ? " 1 long route" : null}
           </p>
         </Alert>
       ) : null}
@@ -158,9 +159,8 @@ export default function Europe() {
                   type="radio"
                   value="done"
                 ></input>
-                <label>Done</label>
-              </ListGroup.Item>
-              <ListGroup.Item>
+                <label style={{ marginRight: "17px" }}>Done</label>
+
                 <input
                   id="not done"
                   name="status"
@@ -206,7 +206,7 @@ export default function Europe() {
                     >
                       {route.name}
                     </Card.Header>
-                    <ListGroup variant="flush">
+                    <ListGroup>
                       <ListGroup.Item>
                         <input
                           type="radio"
@@ -214,20 +214,16 @@ export default function Europe() {
                           name="status"
                           value="notdone"
                         ></input>
-                        <label>Not done</label>
-                      </ListGroup.Item>
+                        <label style={{ marginRight: "17px" }}>Not done</label>
 
-                      <ListGroup.Item>
                         <input
                           type="radio"
                           id="done"
                           name="status"
                           value="done"
                         ></input>
-                        <label style={{ margin: "17px" }}>done</label>
-                      </ListGroup.Item>
-
-                      <ListGroup.Item>
+                        <label style={{ marginRight: "17px" }}>done</label>
+                        <br></br>
                         <input
                           type="radio"
                           id="default"
@@ -235,7 +231,9 @@ export default function Europe() {
                           value="default"
                           defaultChecked
                         ></input>
-                        <label style={{ margin: "17px" }}>not choosen</label>
+                        <label style={{ marginRight: "17px" }}>
+                          not choosen
+                        </label>
                       </ListGroup.Item>
                     </ListGroup>
                   </Card>
