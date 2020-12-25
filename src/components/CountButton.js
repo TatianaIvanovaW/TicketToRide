@@ -57,18 +57,19 @@ export default function CountButton({
       <Button
         style={{
           position: "fixed",
-          top: "25%",
+          top: "12%",
           right: "20px",
           borderRadius: "50%",
-          width: "70px",
-          height: "70px",
-          fontSize: "40px",
+          width: "80px",
+          height: "80px",
+          fontSize: "15px",
+          padding: "5px",
         }}
         variant="info"
         onClick={countScore}
         type="submit"
       >
-        ✓
+        count score <br></br> ✓
       </Button>
     </div>
   );

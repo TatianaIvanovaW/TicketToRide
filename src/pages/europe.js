@@ -244,15 +244,16 @@ export default function Europe() {
             })}
           </div>
         </Form.Group>
-
-        <CountButton
-          tScore={tScore}
-          stations={stations}
-          lrStatus={lrStatus}
-          longRouteScore={longRouteScore}
-          shorts={shorts}
-          result={result}
-        />
+        {longRouteScore !== 0 && shorts.length > 2 ? (
+          <CountButton
+            tScore={tScore}
+            stations={stations}
+            lrStatus={lrStatus}
+            longRouteScore={longRouteScore}
+            shorts={shorts}
+            result={result}
+          />
+        ) : null}
       </div>
     </div>
   );
