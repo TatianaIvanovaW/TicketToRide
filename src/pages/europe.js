@@ -16,9 +16,15 @@ export default function Europe() {
   const [tScore, set_tScore] = useState(0);
   const [shorts, set_Shorts] = useState([]);
   const [info, set_info] = useState(true);
+  const [show, set_show] = useState(false);
 
   const result = (score) => {
     set_finalScore(score);
+    set_show(true);
+  };
+
+  const setFalse = () => {
+    set_show(false);
   };
 
   const shortRouteSorted = shortRoute.sort((a, b) => {
@@ -57,7 +63,7 @@ export default function Europe() {
       }}
     >
       <Header />
-      <ScoreAlert score={finalScore} longRouteId={longRouteId} />
+      {show ? <ScoreAlert status={setFalse} score={finalScore} /> : null}
       {info ? (
         <Alert
           style={{
@@ -66,9 +72,8 @@ export default function Europe() {
             width: "100%",
             zIndex: "10",
           }}
-          variant="info"
+          variant="warning"
         >
-          <Alert.Heading>...</Alert.Heading>
           <p>
             You should choose at least
             {!shorts.length

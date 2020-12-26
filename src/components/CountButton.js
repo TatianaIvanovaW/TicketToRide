@@ -67,12 +67,12 @@ export default function CountButton({
           top: "11%",
           right: "20px",
           borderRadius: "50%",
-          width: "80px",
-          height: "80px",
+          width: "90px",
+          height: "90px",
           fontSize: "15px",
           padding: "5px",
         }}
-        variant="info"
+        variant="warning"
         onClick={countScore}
         type="submit"
       >
