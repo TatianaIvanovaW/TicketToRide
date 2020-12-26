@@ -22,7 +22,7 @@ export default function TrainButtons({ score }) {
     <div>
       <Form.Group>
         <Form.Label as="legend" column sm={2}>
-          Trains:
+          <b style={{ fontSize: "20px" }}>Trains:</b>
         </Form.Label>
         <Row sm={10}>
           <ButtonGroup

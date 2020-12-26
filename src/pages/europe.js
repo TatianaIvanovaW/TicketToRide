@@ -75,6 +75,7 @@ export default function Europe() {
           variant="warning"
         >
           <p>
+            <br></br>
             You should choose at least
             {!shorts.length
               ? " 3 short routes"
@@ -96,15 +97,24 @@ export default function Europe() {
             <Form.Label column sm={2}>
               Score : {finalScore}
             </Form.Label>
-            <Button variant="secondary" onClick={reset} type="submit">
+            <Button variant="warning" onClick={reset} type="submit">
               Reset
             </Button>
           </Form.Group>
           <TrainButtons score={countTrains} />
 
-          <Form.Label>Your long route:</Form.Label>
-
-          <Form.Group>
+          <Form.Label>
+            <b style={{ fontSize: "20px" }}>Your long route:</b>
+          </Form.Label>
+          <Form.Group
+            style={{
+              width: "700px",
+              justifyContent: "center",
+              margin: "auto",
+              padding: "40px",
+              paddingTop: "12px",
+            }}
+          >
             <Form.Control
               onChange={(e) => {
                 e.preventDefault();
@@ -134,22 +144,34 @@ export default function Europe() {
                   name="status"
                   type="radio"
                   value="done"
+                  style={{ marginRight: "5px" }}
                 ></input>
-                <label style={{ marginRight: "17px" }}>Done</label>
+                <label style={{ marginRight: "17px" }}> Done</label>
 
                 <input
                   id="not done"
                   name="status"
                   type="radio"
                   value="notdone"
+                  style={{ marginRight: "5px" }}
                 ></input>
-                <label>Not done</label>
+                <label> Not done</label>
               </ListGroup.Item>
             </ListGroup>
           </Form.Group>
+
           <Form.Group>
-            <Form.Label>Stations used:</Form.Label>
+            <Form.Label>
+              <b style={{ fontSize: "20px" }}>Stations used:</b>
+            </Form.Label>
             <Form.Control
+              style={{
+                width: "700px",
+                justifyContent: "center",
+                margin: "auto",
+                padding: "40px",
+                paddingTop: "12px",
+              }}
               onChange={(e) => {
                 set_stations(parseInt(e.target.value));
               }}
@@ -162,7 +184,10 @@ export default function Europe() {
           </Form.Group>
         </Form>
         <Form.Group>
-          <Form.Label>Your short routes: </Form.Label>
+          <Form.Label>
+            <b style={{ fontSize: "20px" }}>Your short routes:</b>
+          </Form.Label>
+
           <div style={{ display: "flex", flexWrap: "wrap", margin: "20px" }}>
             {shortRouteSorted.map((route) => {
               return (
@@ -189,6 +214,7 @@ export default function Europe() {
                           id="not done"
                           name="status"
                           value="notdone"
+                          style={{ marginRight: "5px" }}
                         ></input>
                         <label style={{ marginRight: "17px" }}>Not done</label>
 
@@ -197,18 +223,20 @@ export default function Europe() {
                           id="done"
                           name="status"
                           value="done"
+                          style={{ marginRight: "5px" }}
                         ></input>
-                        <label style={{ marginRight: "17px" }}>done</label>
+                        <label style={{ marginRight: "17px" }}>Done</label>
                         <br></br>
                         <input
                           type="radio"
                           id="default"
                           name="status"
                           value="default"
+                          style={{ marginRight: "5px" }}
                           defaultChecked
                         ></input>
                         <label style={{ marginRight: "17px" }}>
-                          not choosen
+                          Not choosen
                         </label>
                       </ListGroup.Item>
                     </ListGroup>
