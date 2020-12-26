@@ -10,7 +10,7 @@ export default function ScoreAlert({ score, status }) {
         position: "fixed",
         top: "50%",
         left: "37%",
-        width: "600px",
+        width: "400px",
         height: "298px",
         lineHeight: "40px",
         outline: "9999px solid rgba(0,0,0,0.5)",

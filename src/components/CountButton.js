@@ -69,14 +69,14 @@ export default function CountButton({
           borderRadius: "50%",
           width: "90px",
           height: "90px",
-          fontSize: "15px",
+          fontSize: "40px",
           padding: "5px",
         }}
         variant="warning"
         onClick={countScore}
         type="submit"
       >
-        get <br></br>score <br></br> ✓
+        ✓
       </Button>
     </div>
   );

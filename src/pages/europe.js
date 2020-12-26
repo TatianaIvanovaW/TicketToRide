@@ -102,16 +102,30 @@ export default function Europe() {
             </Button>
           </Form.Group>
           <TrainButtons score={countTrains} />
-
+          <Form.Group>
+            <Form.Label>
+              <b style={{ fontSize: "20px" }}>Stations used:</b>
+            </Form.Label>
+            <Form.Control
+              style={{
+                padding: "10px",
+                paddingTop: "12px",
+              }}
+              onChange={(e) => {
+                set_stations(parseInt(e.target.value));
+              }}
+              as="select"
+            >
+              <option value={12}>0</option>
+              <option value={8}>1</option> <option value={4}>2</option>
+              <option value={0}>3</option>
+            </Form.Control>
+          </Form.Group>
           <Form.Label>
             <b style={{ fontSize: "20px" }}>Your long route:</b>
           </Form.Label>
           <Form.Group
             style={{
-              width: "700px",
-              justifyContent: "center",
-              margin: "auto",
-              padding: "40px",
               paddingTop: "12px",
             }}
           >
@@ -158,29 +172,6 @@ export default function Europe() {
                 <label> Not done</label>
               </ListGroup.Item>
             </ListGroup>
-          </Form.Group>
-
-          <Form.Group>
-            <Form.Label>
-              <b style={{ fontSize: "20px" }}>Stations used:</b>
-            </Form.Label>
-            <Form.Control
-              style={{
-                width: "700px",
-                justifyContent: "center",
-                margin: "auto",
-                padding: "40px",
-                paddingTop: "12px",
-              }}
-              onChange={(e) => {
-                set_stations(parseInt(e.target.value));
-              }}
-              as="select"
-            >
-              <option value={12}>0</option>
-              <option value={8}>1</option> <option value={4}>2</option>
-              <option value={0}>3</option>
-            </Form.Control>
           </Form.Group>
         </Form>
         <Form.Group>
