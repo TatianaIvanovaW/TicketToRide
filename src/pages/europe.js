@@ -1,34 +1,24 @@
 import React from "react";
 import Header from "../components/Header";
-import {
-  Form,
-  Row,
-  Col,
-  Button,
-  Card,
-  ListGroup,
-  Alert,
-} from "react-bootstrap";
+import { Form, Row, Button, Card, ListGroup, Alert } from "react-bootstrap";
 import { useState } from "react";
-import longRoute from "../data/long";
+import longRoutes from "../data/long";
 import shortRoute from "../data/short";
 import TrainButtons from "../components/TrainButtons";
 import CountButton from "../components/CountButton";
+import ScoreAlert from "../components/scoreAlert";
 
 export default function Europe() {
-  const [name, set_name] = useState("");
-  const [screenName, set_screenName] = useState("");
   const [finalScore, set_finalScore] = useState(0);
-  const [longRouteScore, set_longRouteScore] = useState(0);
+  const [longRouteId, set_longRouteId] = useState(0);
   const [stations, set_stations] = useState(12);
   const [lrStatus, set_lrStatus] = useState("");
   const [tScore, set_tScore] = useState(0);
   const [shorts, set_Shorts] = useState([]);
-  const [show, set_show] = useState(true);
+  const [info, set_info] = useState(true);
 
   const result = (score) => {
     set_finalScore(score);
-    set_screenName(name);
   };
 
   const shortRouteSorted = shortRoute.sort((a, b) => {
@@ -39,8 +29,8 @@ export default function Europe() {
     set_finalScore(0);
   };
 
-  const countTrains = (value1) => {
-    set_tScore(value1);
+  const countTrains = (value) => {
+    set_tScore(value);
   };
 
   const getShortRoutes = (e, route) => {
@@ -58,20 +48,17 @@ export default function Europe() {
       return shorts;
     }
   };
-  console.log(`status`, lrStatus);
-  // console.log(`check state`, shorts);
 
   return (
     <div
       style={{
         fontFamily: "'Nova Flat', cursive",
-
         justifyContent: "center",
       }}
     >
       <Header />
-
-      {show ? (
+      <ScoreAlert score={finalScore} longRouteId={longRouteId} />
+      {info ? (
         <Alert
           style={{
             position: "sticky",
@@ -81,7 +68,7 @@ export default function Europe() {
           }}
           variant="info"
         >
-          <Alert.Heading>HI!!</Alert.Heading>
+          <Alert.Heading>...</Alert.Heading>
           <p>
             You should choose at least
             {!shorts.length
@@ -91,9 +78,9 @@ export default function Europe() {
               : shorts.length === 2
               ? " 1 short route"
               : null}
-            {longRouteScore === 0 && shorts.length < 3 ? " and" : " "}
-            {longRouteScore !== 0 && shorts.length > 2 ? set_show(false) : null}
-            {longRouteScore === 0 || lrStatus === "" ? " 1 long route" : null}
+            {longRouteId === 0 && shorts.length < 3 ? " and" : " "}
+            {longRouteId !== 0 && shorts.length > 2 ? set_info(false) : null}
+            {longRouteId === 0 || lrStatus === "" ? " 1 long route" : null}
           </p>
         </Alert>
       ) : null}
@@ -101,22 +88,6 @@ export default function Europe() {
       <div>
         <Form style={{ margin: "20px" }}>
           <Form.Group as={Row} controlId="formHorizontalEmail">
-            <Form.Label column sm={2}>
-              Name
-            </Form.Label>
-            {!screenName ? (
-              <Col md={{ span: 3, offset: 0 }} sm={10}>
-                <Form.Control
-                  onChange={(e) => {
-                    set_name(e.target.value);
-                  }}
-                  type="text"
-                  placeholder="name"
-                />
-              </Col>
-            ) : (
-              <p>{name}</p>
-            )}
             <Form.Label column sm={2}>
               Score : {finalScore}
             </Form.Label>
@@ -133,14 +104,14 @@ export default function Europe() {
               onChange={(e) => {
                 e.preventDefault();
                 console.log(e.target.value);
-                set_longRouteScore(parseInt(e.target.value));
+                set_longRouteId(parseInt(e.target.value));
               }}
               as="select"
             >
               <option value={0}>choose a route...</option>
-              {longRoute.map((route) => {
+              {longRoutes.map((route) => {
                 return (
-                  <option key={route.name} value={route.score}>
+                  <option key={route.name} value={route.id}>
                     {route.name}
                   </option>
                 );
@@ -242,12 +213,12 @@ export default function Europe() {
             })}
           </div>
         </Form.Group>
-        {longRouteScore !== 0 && shorts.length > 2 ? (
+        {longRouteId !== 0 && shorts.length > 2 ? (
           <CountButton
             tScore={tScore}
             stations={stations}
             lrStatus={lrStatus}
-            longRouteScore={longRouteScore}
+            longRouteId={longRouteId}
             shorts={shorts}
             result={result}
           />

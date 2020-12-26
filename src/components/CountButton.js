@@ -1,11 +1,12 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import longRoutes from "../data/long";
 
 export default function CountButton({
   tScore,
   stations,
   lrStatus,
-  longRouteScore,
+  longRouteId,
   shorts,
   result,
 }) {
@@ -16,6 +17,12 @@ export default function CountButton({
 
   let data = [];
 
+  const long = longRoutes.find((route) => {
+    return route.id === longRouteId;
+  });
+
+  console.log(`long`, long.score);
+
   const countScore = (e) => {
     e.preventDefault();
 
@@ -23,9 +30,9 @@ export default function CountButton({
 
     data.push(
       lrStatus === "done"
-        ? longRouteScore
+        ? long.score
         : lrStatus === "notdone"
-        ? -longRouteScore
+        ? -long.score
         : 0
     );
     console.log(shorts);
